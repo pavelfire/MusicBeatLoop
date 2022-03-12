@@ -1,5 +1,5 @@
+package BeatLoops;
 
-import BeatLoops.BeatLoops;
 
 import java.awt.*;
 import javax.swing.*;
@@ -11,10 +11,11 @@ import java.util.*;
 import java.awt.event.*;
 
 //https://www.codejava.net/java-se/swing/jframe-basic-tutorial-and-examples
-public class BeatBox {
+public class BeatLoops {
     JPanel mainPanel;
     ArrayList<JCheckBox> checkBoxList;
     Sequencer sequencer;
+
     Sequence sequence;
     Track track;
     JFrame theFrame;
@@ -23,7 +24,7 @@ public class BeatBox {
     int[] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
 
     public static void main(String[] args) {
-        new BeatBox().buildGUI();
+        new BeatLoops().buildGUI();
     }
 
     public void buildGUI() {
@@ -54,11 +55,11 @@ public class BeatBox {
 
 
         JButton serialize = new JButton("Save serialized");
-        serialize.addActionListener(new BeatBox.MySendListener());
+        serialize.addActionListener(new MySendListener());
         buttonBox.add(serialize);
 
         JButton load = new JButton("Load serialized");
-        load.addActionListener(new BeatBox.MyReadInListener());
+        load.addActionListener(new MyReadInListener());
         buttonBox.add(load);
 
 
@@ -75,57 +76,54 @@ public class BeatBox {
         buttonBox.add(clearBt);
 
         JButton aboutBt = new JButton("About");
-        aboutBt.addActionListener(//);
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        //dispose();
-                        JFrame aboutWindow = new JFrame("About Window");
-                        BorderLayout layout = new BorderLayout();
-                        JPanel background = new JPanel(layout);
-                        background.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-                        Box buttonBox = new Box(BoxLayout.Y_AXIS);
+        aboutBt.addActionListener(
+                e -> {
+                    JFrame aboutWindow = new JFrame("About Window");
+                    BorderLayout layout1 = new BorderLayout();
+                    JPanel background1 = new JPanel(layout1);
+                    background1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                    Box buttonBox1 = new Box(BoxLayout.Y_AXIS);
 
-                        JLabel label = new JLabel("This app from Pavel,", SwingConstants.CENTER);
-                        JLabel label1 = new JLabel("another app here:", SwingConstants.CENTER);
-                        JLabel hyperlink = new JLabel("Visit Google Play");
-                        hyperlink.setForeground(Color.BLUE.darker());
-                        hyperlink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                        hyperlink.addMouseListener(new MouseAdapter() {
+                    JLabel label = new JLabel("This app from Pavel,", SwingConstants.CENTER);
+                    JLabel label1 = new JLabel("another app here:", SwingConstants.CENTER);
+                    JLabel hyperlink = new JLabel("Visit Google Play");
+                    hyperlink.setForeground(Color.BLUE.darker());
+                    hyperlink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                    hyperlink.addMouseListener(new MouseAdapter() {
 
-                            @Override
-                            public void mouseClicked(MouseEvent e) {
-                                // the user clicks on the label
-                                try {
-                                    Desktop.getDesktop().browse(new URI(
-                                            "https://play.google.com/store/apps/developer?id=Pavel+Vasilevich&hl=ru&gl=US"));
-                                } catch (IOException | URISyntaxException e1) {
-                                    e1.printStackTrace();
-                                }
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            // the user clicks on the label
+                            try {
+                                Desktop.getDesktop().browse(new URI(
+                                        "https://play.google.com/store/apps/developer?id=Pavel+Vasilevich&hl=ru&gl=US"));
+                            } catch (IOException | URISyntaxException e1) {
+                                e1.printStackTrace();
                             }
+                        }
 
-                            @Override
-                            public void mouseEntered(MouseEvent e) {
-                                // the mouse has entered the label
-                                hyperlink.setText("<html><a href=''>Visit Google Play</a></html>");
-                            }
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            // the mouse has entered the label
+                            hyperlink.setText("<html><a href=''>Visit Google Play</a></html>");
+                        }
 
-                            @Override
-                            public void mouseExited(MouseEvent e) {
-                                // the mouse has exited the label
-                                // https://www.codejava.net/java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing+
-                                hyperlink.setText("Visit Google Play");
-                            }
-                        });
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            // the mouse has exited the label
+                            // https://www.codejava.net/java-se/swing/how-to-create-hyperlink-with-jlabel-in-java-swing+
+                            hyperlink.setText("Visit Google Play");
+                        }
+                    });
 
-                        buttonBox.add(label);
-                        buttonBox.add(label1);
-                        buttonBox.add(hyperlink);
-                        aboutWindow.add(buttonBox);
-                        //aboutWindow.add(label);
-                        aboutWindow.setSize(300, 100);
-                        aboutWindow.setResizable(false);
-                        aboutWindow.setVisible(true);
-                    }
+                    buttonBox1.add(label);
+                    buttonBox1.add(label1);
+                    buttonBox1.add(hyperlink);
+                    aboutWindow.add(buttonBox1);
+                    //aboutWindow.add(label);
+                    aboutWindow.setSize(300, 100);
+                    aboutWindow.setResizable(false);
+                    aboutWindow.setVisible(true);
                 });
         buttonBox.add(aboutBt);
 
